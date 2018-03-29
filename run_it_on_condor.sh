@@ -26,7 +26,8 @@ else
 	bash_script_name=${1,,}
 	shift 1 # Take all arguments after script name
 fi
-arguments=$@
+
+arguments=( "$@" )
 
 # Get path from which this script was called
 BASH_SCRIPT_DIR=$(pwd)
