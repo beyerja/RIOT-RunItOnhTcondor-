@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # run_it_on_conder.sh script allows you to take bash script
 # and its arguments and run it on condor using default settings.
 
@@ -13,11 +15,9 @@ if [[  $# < 1 ]] ; then
 	exit
 fi
 
-job_length="SHORT"
 # Separate from input line: is it a long job?, bash script name, arguments
 # and set submit file according to length of job
 if [[ ${1,,} == "--long-job" ]]; then 
-	job_length="LONG"
 	template_name="template_submit_files/long_job.submit"
 	bash_script_name=${2,,}
 	shift 2 # Take all arguments after the long job flag and script name
