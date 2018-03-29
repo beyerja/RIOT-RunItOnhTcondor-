@@ -1,0 +1,33 @@
+##########################################
+# Settings file for one HTCondor run.
+#
+##########################################
+
+
+# Script that is supposed to be run
+ Executable =  
+
+# Default universe for normal jobs
+universe            = vanilla
+
+# Where to write output from HTCondor
+output              = /afs/desy.de/user/b/beyerjac/flc/general_scripts/run_it_on_condor/Condor_output/last_job.out
+error               = /afs/desy.de/user/b/beyerjac/flc/general_scripts/run_it_on_condor/Condor_output/last_job.err
+log                 = /afs/desy.de/user/b/beyerjac/flc/general_scripts/run_it_on_condor/Condor_output/last_job.log
+
+# Should files be transfered to remote machine? 
+should_transfer_files   = NO
+
+# When should the user be notified? Options: Always / Complete / Error / Never
+Notification = Error
+
+# Set maximum run time to a day so that also longer jobs can be run like this
++RequestRuntime = 86400
+
+# Set Requested amount of memory
+RequestMemory = 8192
+
+# Set Requested disk space
+RequestDisk = 5632000
+
+Queue 1
