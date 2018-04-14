@@ -33,6 +33,11 @@ if [ ! -d ${condor_output_dir} ]; then
 	mkdir ${condor_output_dir}
 fi
 
+# Create dir for temporary steering files if non-existent
+if [ ! -d ${TMP_DIR} ]; then
+	mkdir ${TMP_DIR}
+fi
+
 arguments=( "$@" )
 
 # Get path from which this script was called
