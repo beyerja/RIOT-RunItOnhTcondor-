@@ -3,19 +3,19 @@
 #
 ##########################################
 
+# Where to write output from HTCondor #TODO CHANGE
+output = ~/last_job.out
+error  = ~/last_job.err
+log    = ~/last_job.log
 
 # Script that is supposed to be run
- Executable =  
+ Executable =
 
 # Default universe for normal jobs
 universe            = vanilla
 
-# Where to write output from HTCondor
-output              = /afs/desy.de/user/b/beyerjac/flc/general_scripts/run_it_on_condor/Condor_output/last_job.out
-error               = /afs/desy.de/user/b/beyerjac/flc/general_scripts/run_it_on_condor/Condor_output/last_job.err
-log                 = /afs/desy.de/user/b/beyerjac/flc/general_scripts/run_it_on_condor/Condor_output/last_job.log
 
-# Should files be transfered to remote machine? 
+# Should files be transfered to remote machine?
 should_transfer_files   = NO
 
 # When should the user be notified? Options: Always / Complete / Error / Never
