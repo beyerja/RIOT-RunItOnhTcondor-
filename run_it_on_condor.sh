@@ -53,7 +53,9 @@ cp ${THIS_SCRIPT_DIR}/${starter_name} ${starter_file_path}
 chmod u+x ${starter_file_path}
 
 # Replace bash script name in template with this script
-executable_line_number=5
+local_dir_line_number=5
+sed -i "${local_dir_line_number}s\.*\ cd ${BASH_SCRIPT_DIR}\  " ${starter_file_path}
+executable_line_number=7
 sed -i "${executable_line_number}s\.*\ ${bash_script_path} $arguments \  " ${starter_file_path}
 starter_line_number=12
 starter_line_string="Executable = ${starter_file_path}"
