@@ -19,11 +19,11 @@ fi
 # and set submit file according to length of job
 if [[ ${1,,} == "--long-job" ]]; then
 	template_name="template_submit_files/long_job.submit"
-	bash_script_name=${2,,}
+	bash_script_name=${2}
 	shift 2 # Take all arguments after the long job flag and script name
 else
 	template_name="template_submit_files/short_job.submit"
-	bash_script_name=${1,,}
+	bash_script_name=${1}
 	shift 1 # Take all arguments after script name
 fi
 
@@ -71,14 +71,9 @@ sed -i "${output_line_number}s\.*\ ${output_line_string} \  " ${submit_file_path
 sed -i "${error_line_number}s\.*\ ${error_line_string} \  " ${submit_file_path}
 sed -i "${log_line_number}s\.*\ ${log_line_string} \  " ${submit_file_path}
 
-# Start job and get job ID to keep track of if it's still running
-if [[ $arguments == "" ]]; then
-	echo "Executing without arguments"
-	condor_job_output=$(condor_submit ${submit_file_path})
-else
-    echo "Executing with arguments"
-	condor_job_output=$(condor_submit ${submit_file_path} arguments="${arguments}")
-fi
+# Send submit to HTCondor
+echo "Executing"
+condor_job_output=$(condor_submit ${submit_file_path})
 condor_job_ID=${condor_job_output##* }
 
 # Wait until job is done before removing submit file
