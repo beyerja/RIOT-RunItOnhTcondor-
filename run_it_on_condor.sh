@@ -74,6 +74,7 @@ sed -i "${log_line_number}s\.*\ ${log_line_string} \  " ${submit_file_path}
 # Send submit to HTCondor
 echo "Executing"
 condor_job_output=$(condor_submit ${submit_file_path})
+condor_job_ID=${condor_job_output##* }
 
 # Wait until job is done before removing submit file
 username=$USER
