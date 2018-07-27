@@ -39,7 +39,7 @@ if [ ! -d ${TMP_DIR} ]; then
 	mkdir ${TMP_DIR}
 fi
 
-arguments="$@"
+arguments=$*
 
 # Get path from which this script was called
 BASH_SCRIPT_DIR=$(pwd)
