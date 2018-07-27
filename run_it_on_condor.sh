@@ -18,13 +18,14 @@ fi
 # Separate from input line: is it a long job?, bash script name, arguments
 # and set submit file according to length of job
 if [[ ${1,,} == "--long-job" ]]; then
+	echo "0"
 	template_name="template_submit_files/long_job.submit"
 	bash_script_name=${2}
-	shift 2 # Take all arguments after the long job flag and script name
+	shift 1 # Take all arguments after the long job flag
 else
+	echo "1"
 	template_name="template_submit_files/short_job.submit"
 	bash_script_name=${1}
-	shift 1 # Take all arguments after script name
 fi
 
 # Create output dir if non-existent
@@ -38,7 +39,7 @@ if [ ! -d ${TMP_DIR} ]; then
 	mkdir ${TMP_DIR}
 fi
 
-arguments=( "$@" )
+arguments=$*
 
 # Get path from which this script was called
 BASH_SCRIPT_DIR=$(pwd)
