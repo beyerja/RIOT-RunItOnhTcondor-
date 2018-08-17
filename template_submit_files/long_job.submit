@@ -30,4 +30,7 @@ RequestMemory = 8192
 # Set Requested disk space
 RequestDisk = 5632000
 
+# Set Requested disk space
+# RequestCpus = 5
+
 Queue 1

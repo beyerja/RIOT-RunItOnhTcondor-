@@ -18,14 +18,10 @@ fi
 # Separate from input line: is it a long job?, bash script name, arguments
 # and set submit file according to length of job
 if [[ ${1,,} == "--long-job" ]]; then
-	echo "0"
 	template_name="template_submit_files/long_job.submit"
-	bash_script_name=${2}
 	shift 1 # Take all arguments after the long job flag
 else
-	echo "1"
 	template_name="template_submit_files/short_job.submit"
-	bash_script_name=${1}
 fi
 
 # Create output dir if non-existent
@@ -56,7 +52,7 @@ chmod u+x ${starter_file_path}
 local_dir_line_number=5
 sed -i "${local_dir_line_number}s\.*\ cd ${BASH_SCRIPT_DIR}\  " ${starter_file_path}
 executable_line_number=7
-sed -i "${executable_line_number}s\.*\ ${bash_script_name} $arguments \  " ${starter_file_path}
+sed -i "${executable_line_number}s\.*\ $arguments \  " ${starter_file_path}
 starter_line_number=12
 starter_line_string="Executable = ${starter_file_path}"
 sed -i "${starter_line_number}s\.*\ ${starter_line_string} \  " ${submit_file_path}
@@ -79,8 +75,11 @@ condor_job_ID=${condor_job_output##* }
 
 # Wait until job is done before removing submit file
 username=$USER
-while [[ $(condor_q -nobatch ${username}) == *$condor_job_ID* ]] ; do
+classad_fail_message="Failed to end classad message"
+current_status="$(condor_q -nobatch ${username})"
+while [[ $current_status == *$condor_job_ID* || $current_status == *$classad_fail_message* ]] ; do
 	sleep 5
+	current_status="$(condor_q -nobatch ${username})"
 done
 
 echo "Done."
